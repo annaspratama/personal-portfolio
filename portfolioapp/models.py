@@ -7,6 +7,7 @@ class Portfolio(models.Model):
     description = models.TextField(max_length=5000)
     image = models.ImageField(upload_to='images')
     year = models.IntegerField(null=True)
+    url = models.CharField(max_length=500, default="Private")
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
