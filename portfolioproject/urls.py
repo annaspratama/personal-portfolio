@@ -22,7 +22,9 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.PortfolioList.as_view(), name='home')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, show_indexes=True) # Media fixes
+]
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
