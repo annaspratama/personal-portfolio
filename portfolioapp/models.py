@@ -5,6 +5,7 @@ from django.db import models
 class Portfolio(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=5000)
+    position = models.CharField(max_length=50, default="Backend Web Developer")
     image = models.ImageField(upload_to='images')
     year = models.IntegerField(null=True)
     url = models.CharField(max_length=500, default="Private")
