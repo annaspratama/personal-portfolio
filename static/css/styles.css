@@ -11601,3 +11601,10 @@ footer.footer .social-link:hover {
 .space {
   margin: 10px 10px 30px 10px;
 }
+
+.transparent {
+  width: -webkit-fill-available;
+  background-color: rgba(107, 104, 104, 0.616);
+  padding: 10px 10px 10px 10px;
+  border-radius: 0.25rem !important;
+}
