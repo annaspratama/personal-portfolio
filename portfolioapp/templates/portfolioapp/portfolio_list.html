@@ -37,7 +37,7 @@
         <header class="masthead d-flex align-items-center">
             <div class="container px-4 px-lg-5 text-center">
                 <h1 class="mb-1">Annas Pratama's Portfolio</h1>
-                <h3 class="mb-5"><em>Fullstack Web Developer | Backend Web Developer</em></h3>
+                <h3 class="mb-5"><em>Backend Web Developer | Fullstack Web Developer</em></h3>
                 <a class="btn btn-primary btn-xl" href="#about">Find Out More</a>
             </div>
         </header>
@@ -46,7 +46,7 @@
             <div class="container px-4 px-lg-5 text-center">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-10">
-                        <h2>Annas Setyo Pratama</h2>
+                        <h2>Annas Setyo Pratomo</h2>
                         <p><i>Bachelor of Informatics Engineering (S.Kom) | Surakarta, Indonesia | annaspratama@icloud.com</i></p>
                         <img src="{% static 'assets/img/annas-pratama.jpg' %}" class="rounded profile-img" alt="Cinque Terre">
                         <p class="lead mb-5">
@@ -72,7 +72,11 @@
                         <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
                             <img class="programming-language" src="{{ MEDIA_URL }}{{ programming.image }}" alt="{{ programming.name }}">
                             <h4><strong>{{ programming.name }}</strong></h4>
-                            <p class="text-faded mb-0">{{ programming.framework }} Framework</p>
+                            <p class="text-faded mb-0">
+                                {% if programming.framework != "" %}
+                                    {{ programming.framework }} Framework
+                                {% endif %}
+                            </p>
                         </div>
                     {% endfor %}
                 </div>
@@ -104,7 +108,7 @@
                             <div class="modal-dialog modal-lg modal-sm" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="portfolio-modal{{ portfolio.pk }}title">{{ portfolio.title }}</h5>
+                                        <h5 class="modal-title" id="portfolio-modal{{ portfolio.pk }}title">{{ portfolio.title }} ({{ portfolio.year }})</h5>
                                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                         </button>
