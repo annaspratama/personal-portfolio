@@ -13,7 +13,7 @@ class Portfolio(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-year']
+        ordering = ['-year', '-created_date']
 
     def __str__(self) -> str:
         return self.title
