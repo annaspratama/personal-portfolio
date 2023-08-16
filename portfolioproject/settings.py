@@ -29,7 +29,8 @@ SECRET_KEY = 'django-insecure-$yae*yr1-)2^c4!3$n)(ntc=8l7*8ep+vxm))!^jgt9pp4hpuv
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1'
+    '127.0.0.1',
+    'localhost'
 ]
 
 
@@ -143,4 +144,4 @@ MEDIA_ROOT = MEDIA_DIR
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Debug toolbar
-INTERNAL_IPS = ['127.0.0.1']
+INTERNAL_IPS = ['127.0.0.1', 'localhost']
