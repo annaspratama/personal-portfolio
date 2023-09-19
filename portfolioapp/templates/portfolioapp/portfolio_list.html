@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 
+{% load i18n %}
 {% load static %}
 
 <html lang="en">
@@ -36,9 +37,9 @@
         <!-- Header-->
         <header class="masthead d-flex align-items-center">
             <div class="container px-4 px-lg-5 text-center">
-                <h1 class="mb-1">Annas Pratama's Portfolio</h1>
+                <h1 class="mb-1">{% trans "Annas Pratama's Portfolio" %}</h1>
                 <h3 class="mb-5"><em>Backend Web Developer | Fullstack Web Developer</em></h3>
-                <a class="btn btn-primary btn-xl" href="#about">Find Out More</a>
+                <a class="btn btn-primary btn-xl" href="#about">{% trans "Find Out More" %}</a>
             </div>
         </header>
         <!-- About-->
@@ -47,15 +48,15 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-10">
                         <h2>Annas Setyo Pratomo</h2>
-                        <p><i>Bachelor of Informatics Engineering (S.Kom) | Surakarta, Indonesia | annaspratama@icloud.com</i></p>
+                        <p><i>{% trans "Bachelor of Informatics Engineering" %} (S.Kom) | Surakarta, Indonesia | annaspratama@icloud.com</i></p>
                         <img src="{% static 'assets/img/annas-pratama.jpg' %}" class="rounded profile-img" alt="Cinque Terre">
                         <p class="lead mb-5">
-                            I have been working in IT industries for more than 4 years, with my most
+                            {% trans "I have been working in IT industries for more than 4 years, with my most
                             recent experience being Fullstack and Backend Developer. I possess
                             skills such as software development that I believe make me best suited for
-                            the position of Web Developer.
+                            the position of Web Developer." %}
                         </p>
-                        <a class="btn btn-dark btn-xl" href="#programming-language">Programming Languanges</a>
+                        <a class="btn btn-dark btn-xl" href="#programming-language">{% trans "Programming Languanges" %}</a>
                     </div>
                 </div>
             </div>
@@ -64,8 +65,8 @@
         <section class="content-section bg-warning text-white text-center" id="programming-language">
             <div class="container px-4 px-lg-5">
                 <div class="content-section-heading">
-                    <h3 class="text-light mb-0">Programming Languanges and Databases</h3>
-                    <h2 class="mb-5">Overview</h2>
+                    <h3 class="text-light mb-0">{% trans "Programming Languanges and Databases" %}</h3>
+                    <h2 class="mb-5">{% trans "Overview" %}</h2>
                 </div>
                 <div class="row gx-4 gx-lg-5 space">
                     {% for programming in programming_language_list %}
@@ -80,15 +81,15 @@
                         </div>
                     {% endfor %}
                 </div>
-                <a class="btn btn-dark btn-xl" href="#portfolio">Portfolios</a>
+                <a class="btn btn-dark btn-xl" href="#portfolio">{% trans "Portfolios" %}</a>
             </div>
         </section>
         <!-- Portfolio-->
         <section class="content-section" id="portfolio">
             <div class="container px-4 px-lg-5">
                 <div class="content-section-heading text-center">
-                    <h3 class="text-secondary mb-0">Portfolios</h3>
-                    <h2 class="mb-5">Recent Projects</h2>
+                    <h3 class="text-secondary mb-0">{% trans "Portfolios" %}</h3>
+                    <h2 class="mb-5">{% trans "Recent Projects" %}</h2>
                 </div>
                 <div class="row gx-0">
                     {% for portfolio in object_list %}
@@ -97,7 +98,7 @@
                                 <div class="caption">
                                     <div class="caption-content transparent">
                                         <div class="h2 ">{{ portfolio.title|safe }} ({{ portfolio.year }})</div>
-                                        <p class="mb-0">{{ portfolio.description|safe|truncatewords:10 }}</p>
+                                        <p class="mb-0">{% trans "{{ portfolio.description|safe|truncatewords:10 }}" %}</p>
                                         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#portfolio-modal-{{ portfolio.pk }}">Read More</button>
                                     </div>
                                 </div>
