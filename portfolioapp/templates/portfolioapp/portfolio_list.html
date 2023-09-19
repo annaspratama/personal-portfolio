@@ -51,10 +51,10 @@
                         <p><i>{% trans "Bachelor of Informatics Engineering" %} (S.Kom) | Surakarta, Indonesia | annaspratama@icloud.com</i></p>
                         <img src="{% static 'assets/img/annas-pratama.jpg' %}" class="rounded profile-img" alt="Cinque Terre">
                         <p class="lead mb-5">
-                            {% trans "I have been working in IT industries for more than 4 years, with my most
+                            I have been working in IT industries for more than 4 years, with my most
                             recent experience being Fullstack and Backend Developer. I possess
                             skills such as software development that I believe make me best suited for
-                            the position of Web Developer." %}
+                            the position of Web Developer.
                         </p>
                         <a class="btn btn-dark btn-xl" href="#programming-language">{% trans "Programming Languanges" %}</a>
                     </div>
@@ -98,7 +98,7 @@
                                 <div class="caption">
                                     <div class="caption-content transparent">
                                         <div class="h2 ">{{ portfolio.title|safe }} ({{ portfolio.year }})</div>
-                                        <p class="mb-0">{% trans "{{ portfolio.description|safe|truncatewords:10 }}" %}</p>
+                                        <p class="mb-0">{{ portfolio.description|safe|truncatewords:10 }}</p>
                                         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#portfolio-modal-{{ portfolio.pk }}">Read More</button>
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@
                                             {% endif %}
                                         </a>
                                         <p class="mb-0 detail-p">{{ portfolio.position }}</p>
-                                        <p class="mb-0 detail-p">{{ portfolio.description|safe }}</p>
+                                        <p class="mb-0 detail-p">{% trans "{{ portfolio.description|safe }}" %}</p>
                                     </div>
                                     <div class="modal-footer">
                                         {% comment %} <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> {% endcomment %}
