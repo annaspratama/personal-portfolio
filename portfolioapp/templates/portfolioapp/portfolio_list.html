@@ -91,10 +91,10 @@
                     <h3 class="text-secondary mb-0">{% trans "Portfolios" %}</h3>
                     <h2 class="mb-5">{% trans "Recent Projects" %}</h2>
                 </div>
-                <div class="row gx-0">
+                <div class="row gx-2">
                     {% for portfolio in object_list %}
                         <div class="col-lg-6">
-                            <div class="portfolio-item">
+                            <div class="portfolio-item mb-2">
                                 <div class="caption">
                                     <div class="caption-content transparent">
                                         <div class="h2 ">{{ portfolio.title|safe }} ({{ portfolio.year }})</div>
