@@ -97,9 +97,27 @@
                             <div class="portfolio-item mb-2">
                                 <div class="caption">
                                     <div class="caption-content transparent">
-                                        <div class="h2 ">{{ portfolio.title|safe }} ({{ portfolio.year }})</div>
-                                        <p class="mb-0">{{ portfolio.description|safe|truncatewords:10 }}</p>
-                                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#portfolio-modal-{{ portfolio.pk }}">Read More</button>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="h2 ">{{ portfolio.title|safe }} ({{ portfolio.year }})</div>
+                                                <p class="mb-0">{{ portfolio.description|safe|truncatewords:10 }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row pt-4">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#portfolio-modal-{{ portfolio.pk }}">Read More</button>
+                                            </div>
+                                            <div class="col-6 flex-column d-flex align-items-end">
+                                                {% if portfolio.techs %}
+                                                    <span class="border border-primary rounded bg-primary p-1">
+                                                        {{ portfolio.techs }}
+                                                    </span>
+                                                {% endif %}
+                                                {% comment %} <div class="flex-column d-flex align-items-end"> {% endcomment %}
+                                                    {% comment %} <div class="caption-content">Halo</div> {% endcomment %}
+                                                {% comment %} </div> {% endcomment %}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <img class="img-fluid img-thumbnail" src="{{ MEDIA_URL }}{{ portfolio.image }}" alt="{{ portfolio.title }}" />
