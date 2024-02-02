@@ -9,7 +9,7 @@ class Portfolio(models.Model):
     image = models.ImageField(upload_to='images')
     year = models.IntegerField(null=True)
     url = models.CharField(max_length=500, default="Private")
-    techs = models.CharField(max_length=40, null=True)
+    techs = models.CharField(max_length=50, null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
