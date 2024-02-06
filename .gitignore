@@ -10,6 +10,9 @@ dist/
 # Settings files
 portfolioproject/settings.*
 
+# Hidden files
+.python-env/
+
 # Media
 media/
 
