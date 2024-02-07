@@ -1,29 +1,12 @@
-# README #
+# Portfolio Project #
 
-This README would normally document whatever steps are necessary to get your application up and running.
 
-### What is this repository for? ###
+This is a mini project built with Django and PostgreSQL.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+## Demo ##
 
-### How do I get set up? ###
+For demonstration you can visit the site [https://annaspratama.my.id](https://annaspratama.my.id) and you can check my latest projects there.
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+## Partnerships ##
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+If you'd like to hire for your partner, you can contact me on mail *annaspratama@icloud*.
