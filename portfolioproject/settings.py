@@ -10,23 +10,32 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os, environ
 from pathlib import Path
+
+# Set environ
+env = environ.Env(
+    # set casting, default value
+    DEBUG = (bool, False)
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATE_DIR = BASE_DIR / 'templates'
-STATIC_DIR = BASE_DIR / 'static'
-MEDIA_DIR = BASE_DIR / 'media'
 
+
+# Take environment variables from .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+print('debug: ', env('DEBUG'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$yae*yr1-)2^c4!3$n)(ntc=8l7*8ep+vxm))!^jgt9pp4hpuv'
+SECRET_KEY = env('SECRET_KEY')
+print('secret: ', SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
@@ -61,10 +70,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'portfolioproject.urls'
 
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR],
+        'DIRS': TEMPLATE_DIRS,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,11 +98,11 @@ WSGI_APPLICATION = 'portfolioproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'portfolio_project_db',
-        'USER': 'admin',
-        'PASSWORD': 'Admin12&3',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 
@@ -120,24 +131,31 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Jakarta'
+TIME_ZONE = env('TIMEZONE')
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = env('USE_TIMEZONE')
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [STATIC_DIR]
-STATIC_ROOT = '/staticfiles/' # Deployment
+STATIC_URL = 'static/'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = MEDIA_DIR
+# Settings for environment
+if DEBUG: # Development
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'staticfiles')
+    ]
+else: # Live
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static') # Only for live
+
+# Media files
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

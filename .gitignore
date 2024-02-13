@@ -11,7 +11,10 @@ dist/
 portfolioproject/settings.*
 
 # Hidden files
+.env
 .python-env/
+.environments/
+staticfiles/
 
 # Media
 media/
