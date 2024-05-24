@@ -68,7 +68,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'portfolioproject.urls'
 
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+# TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'frontend', 'build')]
 
 TEMPLATES = [
     {
@@ -137,16 +138,38 @@ USE_L10N = True
 
 USE_TZ = env('USE_TIMEZONE')
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, "logs", "error.log"),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = 'static/'
 
+print("DEBUG: ", DEBUG)
+
 # Settings for environment
 if DEBUG: # Development
     STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'staticfiles')
+        # os.path.join(BASE_DIR, 'staticfiles'),
+        os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
     ]
 else: # Live
     STATIC_ROOT = os.path.join(BASE_DIR, 'static') # Only for live

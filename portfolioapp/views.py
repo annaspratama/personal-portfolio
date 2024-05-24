@@ -10,3 +10,6 @@ class PortfolioList(ListView):
         context = super().get_context_data(**kwargs)
         context['programming_language_list'] = ProgrammingLanguage.objects.all().order_by('created_date')
         return context
+    
+def index(request):
+    return render(request=request, template_name="index.html")
