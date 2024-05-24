@@ -3,3 +3,5 @@
 *.css linguist-detectable=false
 *.js linguist-detectable=false
 *.css linguist-language=Python
+*.js linguist-language=Python
+*.jsx linguist-language=Python

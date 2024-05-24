@@ -1,14 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, Link, RouterProvider } from 'react-router-dom';
+import React from "react"
+import ReactDOM from "react-dom/client"
+import "./index.css"
+import reportWebVitals from "./reportWebVitals"
+import { createBrowserRouter, Link, RouterProvider } from "react-router-dom"
+import Home from "./pages/Home"
+import Project from "./pages/Project"
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />
+    element: <Home />
+  },
+  {
+    path: "/projects",
+    element: <Project />
   },
   {
     path: "/hello-world",
@@ -19,7 +24,7 @@ const router = createBrowserRouter([
   }
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
