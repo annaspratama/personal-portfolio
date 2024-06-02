@@ -1,6 +1,6 @@
 import BaseLayout from "../components/Layouts/BaseLayout"
 import Intro from "../components/Fragments/Intro"
-import Project from "../components/Fragments/Project"
+import ProjectRecent from "../components/Fragments/ProjectRecent"
 import Experience from "../components/Fragments/Experience"
 import Contact from "../components/Fragments/Contact"
 import Service from "../components/Fragments/Service"
@@ -23,7 +23,7 @@ const Home = () => {
             </div>
 
             {/* Projects */}
-            <Project />
+            <ProjectRecent />
 
             {/* Services */}
             <Service />

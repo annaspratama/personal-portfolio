@@ -4,7 +4,8 @@ import "./index.css"
 import reportWebVitals from "./reportWebVitals"
 import { createBrowserRouter, Link, RouterProvider } from "react-router-dom"
 import Home from "./pages/Home"
-import Project from "./pages/Project"
+import About from "./pages/About"
+import Portfolio from "./pages/Portfolio"
 
 const router = createBrowserRouter([
   {
@@ -12,8 +13,12 @@ const router = createBrowserRouter([
     element: <Home />
   },
   {
-    path: "/projects",
-    element: <Project />
+    path: "/portfolio",
+    element: <Portfolio />
+  },
+  {
+    path: "/about",
+    element: <About />
   },
   {
     path: "/hello-world",
