@@ -31,12 +31,12 @@ const ModalButton = (props) => {
             {showModal ? (
                 <>
                     <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                        <div className="relative w-full my-6 mx-auto max-w-5xl">
+                        <div className="relative w-full h-full my-6 mx-auto max-w-5xl">
                             {/* Content */}
                             <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                                 {/* Header */}
-                                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 bg-primary rounded-t">
-                                    <h3 className="flex text-2xl text-white justify-center font-semibold">
+                                <div className="items-center text-center border-b border-solid border-blueGray-200 bg-primary rounded-t">
+                                    <h3 className="text-center mt-5 text-2xl text-white font-semibold">
                                         {modalTitle}
                                     </h3>
                                     <button
@@ -57,7 +57,7 @@ const ModalButton = (props) => {
                                     <div className="flex justify-center">
                                         <div className="w-2/3 border-2 border-slate-300 rounded-xl shadow bg-primary text-muted text-white lg:text-sm m:text-m text-center ">
                                             <h3 className="text-xl text-white mt-2 mb-2 font-bold">Back End Stacks</h3>
-                                            <div class="w-full h-0.5 bg-slate-300 my-2" />
+                                            <div className="w-full h-0.5 bg-slate-300 my-2" />
                                             <div className="inline-flex flex-wrap text-sm text-muted justify-center text-gray-600 mb-2">
                                                 <div className="border rounded-xl shadow w-24 border-white p-1 bg-gray-200 m-2">
                                                     PHP Laravel

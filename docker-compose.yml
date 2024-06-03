@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  portofolio_django_app:
+    container_name: portofolio_app
+    build:
+      context: "./"
+      dockerfile: ./Dockerfile
+    image: "portfolio-app:1.0.0"
+    volumes:
+      - .:/portfolio-app
+    environment:
+      - "APP_PORT=8080"
+      - "MODE=local"
+    ports:
+      - "8000:8000"
+    networks:
+      - network-portfolio
+    depends_on:
+      - portfolio_postgres_db
+  portfolio_postgres_db:
+    image: postgres:alpine3.20
+    container_name: portfolio_db
+    environment: 
+      POSTGRES_PASSWORD: Admin12&3
+      POSTGRES_USER: admin_portfolio
+      POSTGRES_DB: portfolio_db
+    volumes: 
+      - type: volume
+        source: postgres-portfolio-data
+        target: "/var/lib/postgresql/data"
+        read_only: false
+    ports: 
+      - 5432:5432
+    networks:
+      - network-portfolio
+
+networks:
+  network-portfolio:
+    name: network-portfolio
+    driver: bridge
+
+volumes:
+  postgres-portfolio-data:
+    name: portfolio-postgresdb-data
