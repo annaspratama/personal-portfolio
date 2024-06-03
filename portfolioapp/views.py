@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from rest_framework import response, views
+from .models import About
+from .serializers import AboutSerializer
 # from django.views.generic import ListView
 # from portfolioapp.models import Portfolio, ProgrammingLanguage
 
@@ -22,3 +25,22 @@ def index(request):
     """
         
     return render(request=request, template_name="index.html")
+
+
+class DetailAbout(views.APIView):
+    
+    def get(self, request):
+        """
+        Retrieves the first instance of the `About` model from the database and returns it as a response.
+
+        Parameters:
+            request (HttpRequest): The HTTP request object.
+
+        Returns:
+            response.Response: The response object containing the serialized `About` instance.
+        """
+        
+        about = About.objects.first()
+        serializer = AboutSerializer(about)
+        
+        return response.Response(data=serializer.data)
