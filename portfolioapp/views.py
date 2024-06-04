@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
+from django.core.cache import cache
 from rest_framework import response, views, generics, permissions
 from portfolioproject.authentication import BearerTokenAuthentication
 from .models import About, Expertise, WorkExperience, Project
@@ -81,11 +82,16 @@ class ProjectsList(generics.ListAPIView):
         
         type_param = self.request.GET.get('type')
         
-        if type_param == 'recent': queryset = queryset.order_by('-id')[:2]
-        else: queryset = queryset.order_by('-id')
+        if type_param == 'recent':
+            cached_data = cache.get('recent_projects')
+            queryset = queryset.order_by('-id')[:2]
+            cache.set(key='recent_projects', value=queryset, timeout=60 * 60 * 1)
+        else:
+            cached_data = cache.get('all_projects')
+            queryset = queryset.order_by('-id')
+            cache.set(key='all_projects', value=queryset, timeout=60 * 60 * 1)
         
-        
-        return queryset
+        return cached_data if cached_data else queryset
 
 
 class ProjectsDetail(generics.RetrieveAPIView):
