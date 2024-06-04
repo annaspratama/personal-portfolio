@@ -78,6 +78,7 @@ class ProjectsList(generics.ListAPIView):
             QuerySet: The filtered queryset.
         """
         
+        timeout = 60 * 60 * 1 # 1 hour
         queryset = self.queryset
         
         type_param = self.request.GET.get('type')
@@ -85,11 +86,11 @@ class ProjectsList(generics.ListAPIView):
         if type_param == 'recent':
             cached_data = cache.get('recent_projects')
             queryset = queryset.order_by('-id')[:2]
-            cache.set(key='recent_projects', value=queryset, timeout=60 * 60 * 1)
+            cache.set(key='recent_projects', value=queryset, timeout=timeout)
         else:
             cached_data = cache.get('all_projects')
             queryset = queryset.order_by('-id')
-            cache.set(key='all_projects', value=queryset, timeout=60 * 60 * 1)
+            cache.set(key='all_projects', value=queryset, timeout=timeout)
         
         return cached_data if cached_data else queryset
 

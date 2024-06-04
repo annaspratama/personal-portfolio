@@ -1,34 +1,40 @@
+import { useState, useEffect } from "react"
+import aboutDetail from "../../../services/about.service"
+import { hostDefault } from "../../../services/host.service"
+
+const defaultAbout = {}
+
 const Intro = (props) => {
 
     const { addClassname } = props
+    const [about, setAbout] = useState(defaultAbout)
+
+    useEffect(() => {
+        aboutDetail((success, result) => {
+            if (success) setAbout(result)
+        })
+    }, [])
 
     return (
         <div className="">
             <div className={`rounded-2xl bg-white p-6 shadow dark:bg-black dark:shadow-dark ${addClassname}`}>
                 <div className="aspect-6/4 overflow-hidden rounded-lg bg-light pt-4 text-center dark:bg-dark-2">
-                    <img src="./assets/images/profile.png" alt="Img Profile"
+                    <img src={`${hostDefault}/${about.image}`} alt="Img Profile"
                         className="inline-block h-full w-full scale-110 object-contain object-bottom" />
                 </div>
 
                 <div className="mt-6">
-                    <h3 className="text-2xl font-semibold dark:text-light">Annas Pratama 👋</h3>
-                    <p className="mt-2 text-muted dark:text-light/70">
-                        A Passionate
-                        <span className="font-semibold text-dark dark:text-white mx-1">
-                            Back End Developer
-                        </span>
-                        &
-                        <span className="font-semibold text-dark dark:text-white mx-1">
-                            Full Stack Developer
-                        </span>
-                        🖥️ having
-                        <span className="font-semibold text-dark dark:text-white mx-1"> 4+ years </span>
-                        of experiences in Web Development.
-                    </p>
+                    <h3 className="text-2xl font-semibold dark:text-light">
+                        {about.title}
+                    </h3>
+                    <div className="mt-2 text-muted dark:text-light/70">
+                        <div dangerouslySetInnerHTML={{ __html: about.description }} />
+                    </div>
 
                     {/* CTA buttons */}
                     <div className="mt-6 flex flex-wrap gap-2">
-                        <a href="/#"
+                        <a href={`https://wa.me/${about.phone}`}
+                            target="_blank" rel="noreferrer"
                             className="inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-primary px-6 py-4 font-medium text-white transition hover:bg-blue-600 focus:outline-none focus:ring disabled:pointer-events-none disabled:opacity-50">
                             <svg className="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path fill="currentColor" fillRule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clipule="evenodd" />
@@ -37,7 +43,7 @@ const Intro = (props) => {
 
                             <span>WhatsApp</span>
                         </a>
-                        <button type="button" data-clipboard-text="annaspratama@icloud.com"
+                        <button type="button" data-clipboard-text={about.email}
                             data-clipboard-action="copy" data-clipboard-success-text="Copied to clipboard"
                             className="js-clipboard hs-tooltip inline-flex items-center gap-x-2 rounded-lg border border-light bg-transparent px-6 py-4 font-medium text-dark transition [--trigger:focus] hover:bg-light focus:outline-none focus:ring disabled:pointer-events-none disabled:opacity-50 dark:border-dark dark:text-light/70 dark:hover:bg-dark dark:hover:text-white">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
