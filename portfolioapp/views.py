@@ -1,17 +1,12 @@
 from django.shortcuts import render
-from rest_framework import response, views
-from .models import About
-from .serializers import AboutSerializer
-# from django.views.generic import ListView
-# from portfolioapp.models import Portfolio, ProgrammingLanguage
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
+from rest_framework import response, views, generics, permissions
+from portfolioproject.authentication import BearerTokenAuthentication
+from .models import About, Expertise, WorkExperience, Project
+from .serializers import AboutSerializer, ExpertiseSerializer, WorkExperienceSerializer, ProjectsSerializer, ProjectSerializer
 
-# class PortfolioList(ListView):
-#     model = Portfolio
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['programming_language_list'] = ProgrammingLanguage.objects.all().order_by('created_date')
-#         return context
     
 def index(request):
     """
@@ -28,7 +23,11 @@ def index(request):
 
 
 class DetailAbout(views.APIView):
+    authentication_classes = (BearerTokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
     
+    @method_decorator(cache_page(60 * 60 * 24))
+    @method_decorator(vary_on_cookie)
     def get(self, request):
         """
         Retrieves the first instance of the `About` model from the database and returns it as a response.
@@ -37,10 +36,60 @@ class DetailAbout(views.APIView):
             request (HttpRequest): The HTTP request object.
 
         Returns:
-            response.Response: The response object containing the serialized `About` instance.
+            Response: The serialized data of the first `About` object.
         """
         
         about = About.objects.first()
         serializer = AboutSerializer(about)
         
         return response.Response(data=serializer.data)
+    
+
+class ListExpertiseList(generics.ListAPIView):
+    authentication_classes = (BearerTokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Expertise.objects.all()
+    serializer_class = ExpertiseSerializer
+    
+    
+class WorkExperienceList(generics.ListAPIView):
+    authentication_classes = (BearerTokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = WorkExperience.objects.all()
+    serializer_class = WorkExperienceSerializer
+    
+
+class ProjectsList(generics.ListAPIView):
+    authentication_classes = (BearerTokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Project.objects.all()
+    serializer_class = ProjectsSerializer
+    
+    def get_queryset(self):
+        """
+        Retrieves the queryset for the view.
+
+        This method retrieves the queryset for the view and applies any necessary filtering based on the
+        `type` parameter in the request. If the `type` parameter is set to `'recent'`, the queryset is
+        ordered by the `-id` field and limited to the first two items.
+
+        Returns:
+            QuerySet: The filtered queryset.
+        """
+        
+        queryset = self.queryset
+        
+        type_param = self.request.GET.get('type')
+        
+        if type_param == 'recent': queryset = queryset.order_by('-id')[:2]
+        else: queryset = queryset.order_by('-id')
+        
+        
+        return queryset
+
+
+class ProjectsDetail(generics.RetrieveAPIView):
+    authentication_classes = (BearerTokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer

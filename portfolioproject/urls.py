@@ -20,10 +20,9 @@ from django.conf.urls.static import static
 from . import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls'), name='rest_framework'),
-    # path('', views.PortfolioList.as_view(), name='home'),
-    path('', views.index, name='home'),
+    path(route='admin/', view=admin.site.urls, name='administrator'),
+    path(route='api-auth/', view=include('rest_framework.urls'), name='rest_framework'),
+    path(route='', view=views.index, name='home'),
 ]
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

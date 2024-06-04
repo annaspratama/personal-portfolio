@@ -59,7 +59,7 @@ class WorkExperience(models.Model):
     company = models.CharField(max_length=100)
     description = models.TextField(max_length=5000, null=True, blank=True)
     start_year = models.IntegerField(null=True)
-    end_year = models.IntegerField(null=True)
+    end_year = models.IntegerField(null=True, default=0)
     url = models.URLField(null=True, blank=True)
     image = models.ImageField(upload_to='images/experience', null=True, blank=True)
 
@@ -88,7 +88,7 @@ class Project(models.Model):
     description = models.TextField(null=True, blank=True)
     url = models.URLField(null=True, blank=True)
     start_year = models.IntegerField(null=True)
-    end_year = models.IntegerField(null=True)
+    end_year = models.IntegerField(null=True, default=0)
     position = models.CharField(max_length=50, choices=[('Back End Developer', 'Back End Developer'), ('Full Stack Developer', 'Full Stack Developer')], default="Back End Developer")
 
     def __str__(self) -> str:
