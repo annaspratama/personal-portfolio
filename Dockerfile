@@ -34,10 +34,11 @@ RUN chown -R adminuser:portfoliogroup /portfolio-app
 USER adminuser
 
 # Set entrypoint
-ENTRYPOINT ["python"] 
+# ENTRYPOINT ["python"] 
+
 
 # Run python app
-CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+# CMD ["gunicorn", "--bind", "0.0.0.0:8000", "portfolioproject.wsgi:application"]
 
 # Expose port
 EXPOSE ${APP_PORT}

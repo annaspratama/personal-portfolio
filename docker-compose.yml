@@ -1,8 +1,9 @@
 version: "3.8"
 
 services:
-  portofolio_django_app:
+  portfolio_django_app:
     container_name: portofolio_app
+    command: gunicorn --bind 0.0.0.0:8000 portfolioproject.wsgi:application && python manage.py makemigrations && python manage.py migrate
     build:
       context: "./"
       dockerfile: ./Dockerfile
@@ -49,6 +50,19 @@ services:
       .env
     networks:
       - network-portfolio
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    volumes:
+      - static_data:/static
+      - media_data:/media
+    ports:
+      - 80:80
+    depends_on:
+      - portfolio_django_app
+    networks:
+      - network-portfolio
 
 networks:
   network-portfolio:
@@ -59,3 +73,5 @@ volumes:
   postgres-portfolio-data:
     name: portfolio-postgresdb-data
   redis_data:
+  static_data:
+  media_data:

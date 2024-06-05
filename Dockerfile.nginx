@@ -1,0 +1,11 @@
+# Dockerfile
+FROM nginx:latest
+
+# Copy Nginx config
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+
+# Copy static files
+COPY ./static /static
+
+# Copy media files
+COPY ./media /media

@@ -91,7 +91,6 @@ CORS_ALLOW_METHODS = [
 
 ROOT_URLCONF = 'portfolioproject.urls'
 
-# TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'frontend', 'build')]
 
 TEMPLATES = [
@@ -206,17 +205,16 @@ LOGGING = {
 STATIC_URL = 'static/'
 
 # Settings for environment
-if DEBUG: # Development
-    STATICFILES_DIRS = [
-        # os.path.join(BASE_DIR, 'staticfiles'),
-        os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
-    ]
-else: # Live
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static') # Only for live
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend', 'build', 'static'),
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static') # Only for live
 
 # Media files
 MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'frontend', 'build', 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
