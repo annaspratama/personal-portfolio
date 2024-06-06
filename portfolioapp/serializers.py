@@ -37,6 +37,28 @@ class ProjectImagesSerializer(serializers.ModelSerializer):
         fields = ('id', 'image')
         
         
+class RecentProjectsSerializer(serializers.ModelSerializer):
+    
+    image = serializers.SerializerMethodField()
+    
+    def get_image(self, obj:Project) -> str:
+        """
+        Returns the URL of the first image associated with the given Project object.
+
+        Parameters:
+            obj (Project): The Project object for which to retrieve the image.
+
+        Returns:
+            str: The URL of the first image associated with the Project object.
+        """
+    
+        return obj.images.first().image.url
+    
+    class Meta:
+        model = Project
+        fields = '__all__'
+        
+        
 class StackSerializer(serializers.ModelSerializer):
     
     class Meta:

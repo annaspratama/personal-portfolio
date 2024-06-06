@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import "./index.css"
 import reportWebVitals from "./reportWebVitals"
-import { createBrowserRouter, Link, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Home from "./pages/Home"
 import About from "./pages/About"
 import Portfolio from "./pages/Portfolio"
@@ -20,13 +20,6 @@ const router = createBrowserRouter([
     path: "/about",
     element: <About />
   },
-  {
-    path: "/hello-world",
-    element: <div className="flex text-2xl flex-col">
-      Hello world!
-      <Link to="/" className="font-sm text-blue-500"> Kembali</Link>
-    </div>
-  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

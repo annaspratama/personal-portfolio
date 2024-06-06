@@ -6,7 +6,7 @@ from django.core.cache import cache
 from rest_framework import response, views, generics, permissions
 from portfolioproject.authentication import BearerTokenAuthentication
 from .models import About, Expertise, WorkExperience, Project
-from .serializers import AboutSerializer, ExpertiseSerializer, WorkExperienceSerializer, ProjectsSerializer, ProjectSerializer
+from .serializers import AboutSerializer, ExpertiseSerializer, WorkExperienceSerializer, ProjectsSerializer, ProjectSerializer, RecentProjectsSerializer
 
     
 def index(request):
@@ -93,6 +93,23 @@ class ProjectsList(generics.ListAPIView):
             cache.set(key='all_projects', value=queryset, timeout=timeout)
         
         return cached_data if cached_data else queryset
+    
+    def get_serializer_class(self):
+        """
+        Returns the appropriate serializer class based on the value of the 'type' query parameter in the request.
+
+        This function takes no parameters.
+
+        Returns:
+            The serializer class to be used for the view. If the 'type' query parameter is set to 'recent', it returns
+            the `RecentProjectsSerializer` class. Otherwise, it returns the `serializer_class` attribute of the view.
+        """
+        
+        type_param = self.request.GET.get('type')
+        
+        if type_param == 'recent': return RecentProjectsSerializer
+        
+        return self.serializer_class
 
 
 class ProjectsDetail(generics.RetrieveAPIView):

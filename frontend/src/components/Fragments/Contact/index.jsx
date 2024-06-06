@@ -6,7 +6,7 @@ const Contact = () => {
             </div>
 
             <h2 className="mt-4 text-[40px] font-semibold leading-snug text-dark dark:text-light">
-                Let's👋 <br />
+                Let's 👋 <br />
                 Work Together
             </h2>
         </div>
