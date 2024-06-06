@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   portfolio_django_app:
-    container_name: portofolio_app
+    container_name: portfolio_app
     command: gunicorn --bind 0.0.0.0:8000 portfolioproject.wsgi:application
     build:
       context: "./"
@@ -49,10 +49,11 @@ services:
       - $REDIS_PORT:$REDIS_PORT
     volumes:
       - redis_data:/data
-    command: /bin/sh -c "redis-server --requirepass $REDIS_PASSWORD"
+    command: /bin/sh -c "redis-server --requirepass $$REDIS_PASSWORD"
     networks:
       - network-portfolio
   portfolio_nginx:
+    container_name: portfolio_nginx
     build:
       context: .
       dockerfile: Dockerfile.nginx
