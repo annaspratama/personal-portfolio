@@ -7,11 +7,9 @@ ENV MODE=local
 ENV PYTHONUNBUFFERED 1
 
 # Install supported components on Postgres SQL
-# RUN apt update && \
-#     apt install -y build-deps gcc python-dev musl-dev && \
-#     apt install postgresql-dev
 RUN apt-get update \
-    && apt-get -y install libpq-dev gcc
+    && apt-get -y install libpq-dev gcc \
+    && apt-get install -y netcat-openbsd
 
 # Upgrade pip
 RUN pip install --upgrade pip
@@ -30,11 +28,14 @@ RUN groupadd -g 1000 portfoliogroup
 RUN useradd -m -u 1000 -g portfoliogroup adminuser
 RUN chown -R adminuser:portfoliogroup /portfolio-app
 
+# Set entrypoint
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Switch user
 USER adminuser
 
-# Set entrypoint
-# ENTRYPOINT ["python"] 
+ENTRYPOINT ["/entrypoint.sh"]
 
 
 # Run python app
