@@ -4,9 +4,10 @@ from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 from django.core.cache import cache
 from rest_framework import response, views, generics, permissions
+from rest_framework.pagination import PageNumberPagination
 from portfolioproject.authentication import BearerTokenAuthentication
 from .models import About, Expertise, WorkExperience, Project
-from .serializers import AboutSerializer, ExpertiseSerializer, WorkExperienceSerializer, ProjectsSerializer, ProjectSerializer, RecentProjectsSerializer
+from .serializers import AboutSerializer, ExpertiseSerializer, WorkExperienceSerializer, ProjectListDetailSerializer, ProjectDetailSerializer, RecentProjectsSerializer
 
     
 def index(request):
@@ -59,12 +60,19 @@ class WorkExperienceList(generics.ListAPIView):
     queryset = WorkExperience.objects.all()
     serializer_class = WorkExperienceSerializer
     
+    
+class ListPagination(PageNumberPagination):
+    page_size = 3
+    page_size_query_param = "page_size"
+    max_page_size = 10
+    
 
 class ProjectsList(generics.ListAPIView):
     authentication_classes = (BearerTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Project.objects.all()
-    serializer_class = ProjectsSerializer
+    serializer_class = ProjectListDetailSerializer
+    pagination_class = ListPagination
     
     def get_queryset(self):
         """
@@ -107,7 +115,7 @@ class ProjectsList(generics.ListAPIView):
         
         type_param = self.request.GET.get('type')
         
-        if type_param == 'recent': return RecentProjectsSerializer
+        if type_param == 'recent': return RecentProjectsSerializer; 
         
         return self.serializer_class
 
@@ -116,4 +124,4 @@ class ProjectsDetail(generics.RetrieveAPIView):
     authentication_classes = (BearerTokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Project.objects.all()
-    serializer_class = ProjectSerializer
+    serializer_class = ProjectDetailSerializer

@@ -1,5 +1,6 @@
 from .models import About, Expertise, WorkExperience, Project, ProjectImage, Stack
 from rest_framework import serializers
+import logging
 
 
 class AboutSerializer(serializers.ModelSerializer):
@@ -66,8 +67,17 @@ class StackSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'image')
         
         
-class ProjectSerializer(serializers.ModelSerializer):
+class ProjectDetailSerializer(serializers.ModelSerializer):
     
+    images = ProjectImagesSerializer(many=True, read_only=True)
+    stacks = StackSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = Project
+        fields = '__all__'
+    
+
+class ProjectListDetailSerializer(ProjectDetailSerializer):
     images = ProjectImagesSerializer(many=True, read_only=True)
     stacks = StackSerializer(many=True, read_only=True)
     

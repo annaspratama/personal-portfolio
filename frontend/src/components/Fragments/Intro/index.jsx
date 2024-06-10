@@ -28,7 +28,18 @@ const Intro = (props) => {
                         {about.title}
                     </h3>
                     <div className="mt-2 text-muted dark:text-light/70">
-                        <div dangerouslySetInnerHTML={{ __html: about.description }} />
+                        {/* <div dangerouslySetInnerHTML={{ __html: about.description }} /> */}
+                        {/* Butuh 520 karakter lagi. */}
+                        A Passionate
+                        <span className="font-semibold text-dark dark:text-white mx-1">
+                            Back End Developer
+                        </span>
+                        &
+                        <span className="font-semibold text-dark dark:text-white mx-1">
+                            Full Stack Developer
+                        </span>
+                        🖥️ having
+                        <span className="font-semibold text-dark dark:text-white mx-1"> 4+ years </span> in Web Development.
                     </div>
 
                     {/* CTA buttons */}

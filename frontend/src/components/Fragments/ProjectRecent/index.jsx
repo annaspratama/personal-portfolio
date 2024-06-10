@@ -16,7 +16,7 @@ const ProjectRecent = () => {
 
     useEffect(() => {
         recentLimitProjects().then(res => {
-            setProjects(res)
+            setProjects(res.results)
         }).catch(err => {
             console.error(err)
         })

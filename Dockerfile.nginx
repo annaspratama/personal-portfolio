@@ -6,6 +6,10 @@ COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Copy static files
 COPY ./static /static
+COPY ./frontend/build/manifest.json /static/manifest/manifest.json
+COPY ./frontend/build/asset-manifest.json /static/manifest/asset-manifest.json
+COPY ./frontend/build/favicon.ico /static/manifest/favicon.ico
+COPY ./frontend/build/robots.txt /static/manifest/robots.txt
 
 # Copy media files
 COPY ./media /media

@@ -26,7 +26,7 @@ const Experience = () => {
             </h3>
 
             <div
-                className="max-h-[200px] space-y-4 overflow-hidden pb-6 pt-4 [&::-webkit-scrollbar-thumb]:bg-gray-400 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:w-0">
+                className="max-h-[300px] space-y-4 overflow-hidden pb-6 pt-4 [&::-webkit-scrollbar-thumb]:bg-gray-400 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:w-0">
                 <div className="animate-scrollY space-y-4 group-hover:[animation-play-state:paused]">
                     {workExperiences.map((workExperience, index) => (
                         <ExperienceItemDefault key={workExperience.id} startYear={workExperience.start_year} endYear={workExperience.end_year} company={workExperience.company} position={workExperience.title} image={workExperience.image} />

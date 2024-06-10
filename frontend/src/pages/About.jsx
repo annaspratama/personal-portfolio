@@ -1,3 +1,4 @@
+import AboutDetail from "../components/Fragments/AboutDetail"
 import Intro from "../components/Fragments/Intro"
 import BaseLayout from "../components/Layouts/BaseLayout"
 
@@ -9,37 +10,7 @@ const About = () => {
 
             {/* About */}
             <div className="rounded-2xl bg-white p-6 shadow dark:bg-black dark:shadow-dark lg:col-span-2 lg:p-10 max-h-[602px]">
-                <div className="flex flex-col-reverse items-start gap-6 lg:flex-row lg:gap-10">
-                    <div className="">
-                        <h2 className="text-3xl font-semibold text-dark dark:text-light lg:text-[40px]">
-                            Hi, I'm <span className="text-primary">Annas Pratama</span> 👋
-                        </h2>
-                        <p className="mt-4 text-lg text-muted dark:text-light/70 lg:mt-6 lg:text-2xl">
-                            A Passionate and dedicated
-                            <span className="font-semibold text-dark dark:text-white mr-1 ml-1">
-                                Back End Developer
-                            </span>
-                            &
-                            <span className="font-semibold text-dark dark:text-white mr-1 ml-1">
-                                Full Stack Developer 🖥️
-                            </span>
-                            having
-                            <span className="font-semibold text-dark dark:text-white mr-1 ml-1">
-                                4+ years
-                            </span>
-                            of experiences in Web Development.
-                        </p>
-                    </div>
-                    <div className="flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-light px-4 py-2 text-center text-base font-medium leading-none text-primary dark:bg-dark-2 lg:text-lg">
-                        <span className="relative flex h-2 w-2 shrink-0">
-                            <span
-                                className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75 dark:bg-light"></span>
-                            <span
-                                className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
-                        </span>
-                        <span>Available For Hire</span>
-                    </div>
-                </div>
+                <AboutDetail />
 
                 {/* <div className="mt-8 flex flex-wrap justify-between gap-6 lg:mt-12 lg:gap-10">
                     <div className="flex flex-wrap items-start gap-6 lg:gap-10">

@@ -9,6 +9,7 @@ class About(models.Model):
     url_instagram = models.URLField(null=True, blank=True)
     url_github = models.URLField(null=True, blank=True)
     image = models.ImageField(upload_to='images/about', null=True, blank=True)
+    brand_profile = models.TextField(max_length=7000, null=True, blank=True)
 
     def __str__(self) -> str:
         """
@@ -91,6 +92,7 @@ class Project(models.Model):
     start_year = models.IntegerField(null=True)
     end_year = models.IntegerField(null=True, default=0)
     position = models.CharField(max_length=50, choices=[('Back End Developer', 'Back End Developer'), ('Full Stack Developer', 'Full Stack Developer')], default="Back End Developer")
+    stack_type = models.CharField(max_length=50, choices=[('Front End Stacks', 'Front End Stacks'), ('Back End Stacks', 'Back End Stacks'), ('Full Stacks', 'Full Stacks')], default="Back End Stacks")
 
     def __str__(self) -> str:
         """
@@ -112,7 +114,7 @@ class Project(models.Model):
 
 
 class ProjectImage(models.Model):
-    project = models.ForeignKey(Project, related_name='images', on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, related_name='images', verbose_name="Project", on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/project', null=True, blank=True)
 
     def __str__(self) -> str:

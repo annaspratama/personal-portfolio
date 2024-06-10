@@ -23,9 +23,9 @@ const recentLimitProjects = async () => {
  * @return {Promise<Array>} An array of all projects.
  * @throws {Error} If there is an error retrieving the all projects.
  */
-const projects = async () => {
+const projects = async (page) => {
     try {
-        const response = await axios.get(`${host}/projects`, { headers })
+        const response = await axios.get(`${host}/projects?page=${page}`, { headers })
         return response.data
     } catch (error) {
         console.error('Error:', error)
