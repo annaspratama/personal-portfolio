@@ -33,4 +33,21 @@ const projects = async (page) => {
     }
 }
 
-export { recentLimitProjects, projects }
+/**
+ * Retrieves the details of a project from the API.
+ *
+ * @param {number} id - The ID of the project.
+ * @return {Promise<Object>} The details of the project.
+ * @throws {Error} If there is an error retrieving the project details.
+ */
+const projectDetail = async (id) => {
+    try {
+        const response = await axios.get(`${host}/${id}/project`, { headers })
+        return response
+    } catch (error) {
+        console.error('Error:', error)
+        throw error
+    }
+}
+
+export { recentLimitProjects, projects, projectDetail }

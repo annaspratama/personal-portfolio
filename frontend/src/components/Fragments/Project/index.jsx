@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Carousel from "../Carousel"
+// import Carousel from "../Carousel"
 import ModalButton from "../Modal"
 import Pagination from "../Pagination"
 import aboutDetail from "../../../services/about.service"
@@ -18,7 +18,7 @@ const Project = () => {
     const [next, setNext] = useState(null)
     const [previous, setPrevious] = useState(null)
     const [page, setPage] = useState(1)
-    const [pageSize, setPageSize] = useState(defaultPageSize)
+    const [pageSize] = useState(defaultPageSize)
 
     useEffect(() => {
         aboutDetail((success, result) => {
@@ -34,7 +34,6 @@ const Project = () => {
                 if (res.count > 0) setCount(res.count)
                 setNext(res.next)
                 setPrevious(res.previous)
-                // setPageSize(res.results.length)
             }
         }).catch(err => {
             console.error(err)
@@ -54,14 +53,6 @@ const Project = () => {
     const handlePageChange = (newPage) => {
         setPage(newPage);
     }
-
-    // const slides = [
-    //     "https://annaspratama.my.id/media/images/2023-simonik-monitor-rapb.png",
-    //     "https://annaspratama.my.id/media/images/2023-simonik-monitor-rapb.png",
-    //     "https://annaspratama.my.id/media/images/2023-simonik-monitor-rapb.png",
-    //     "https://annaspratama.my.id/media/images/2023-simonik-monitor-rapb.png",
-    //     "https://annaspratama.my.id/media/images/2023-simonik-monitor-rapb.png",
-    // ]
 
     return (
         <div className="rounded-2xl bg-white p-6 shadow dark:bg-black dark:shadow-dark lg:col-span-2 lg:p-10">
@@ -102,25 +93,10 @@ const Project = () => {
                                                         project.stacks.slice(0, 5).map((stack) => (
                                                             <StackItem key={stack.id} name={stack.name} />
                                                         )
-                                                        )}
+                                                    )}
                                                 </div>
                                                 <div className="flex w-1/3 justify-end">
-                                                    <ModalButton buttonTitle={buttonTitle} modalTitle={project.title} >
-
-                                                        <Carousel autoSlide={true} >
-                                                            {project.images.length > 0 &&
-                                                                [...project.images.map((img, _) => (
-                                                                    <img key={img.id} src={img.image} alt={project.title} />
-                                                                )),]}
-                                                        </Carousel>
-
-                                                        <div className="mt-5">
-                                                            <p className="text-muted text-justify">
-                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                                            </p>
-                                                        </div>
-                                                    </ ModalButton>
+                                                    <ModalButton projectId={project.id} buttonTitle={buttonTitle} />
                                                 </div>
                                             </div>
                                         </div>
