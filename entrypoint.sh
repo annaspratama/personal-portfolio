@@ -9,8 +9,9 @@ echo "The PostgreSQL database is up."
 
 # Run migrations
 echo "Running collect static files..."
+rm -r static/ 2> /dev/null
 python manage.py collectstatic --no-input
-echo "Static files has collected."
+echo "Existing static directory has been removed. Static files has collected."
 
 echo "Running migrations..."
 python manage.py makemigrations

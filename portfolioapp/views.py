@@ -1,3 +1,5 @@
+import json
+from .utils import static_fallback_open
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
@@ -20,8 +22,19 @@ def index(request):
     Returns:
         HttpResponse: The rendered index.html template.
     """
+    
+    asset_manifest = {}
+    with static_fallback_open(static_path="asset-manifest.json") as json_file:
+        asset_manifest = json.load(json_file)
         
-    return render(request=request, template_name="index.html")
+    react_css_bundle = asset_manifest["files"]["main.css"]
+    react_js_bundle = asset_manifest["files"]["main.js"]
+    # react_css_bundle = f"/static{react_css_bundle}"
+    # react_js_bundle = f"/static{react_js_bundle}"
+
+    context = {"react_css_bundle": react_css_bundle, "react_js_bundle": react_js_bundle}
+        
+    return render(request=request, template_name="index.html", context=context)
 
 
 class DetailAbout(views.APIView):

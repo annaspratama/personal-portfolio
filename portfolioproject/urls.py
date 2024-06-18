@@ -17,14 +17,16 @@ from django.contrib import admin
 from django.urls import path, include
 from portfolioapp import views
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 from . import settings
 
 urlpatterns = [
     path(route='admin/', view=admin.site.urls, name='administrator'),
     path(route='api-auth/', view=include('rest_framework.urls'), name='rest_framework'),
     path(route='', view=views.index, name='home'),
+    # path(route='manifest.json', view=TemplateView.as_view(template_name='manifest.json', content_type='application/json'), name='manifest.json')
 ]
-# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # APIs URL
