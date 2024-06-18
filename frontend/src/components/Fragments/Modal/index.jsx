@@ -88,7 +88,7 @@ const ModalButton = (props) => {
                                         <Carousel autoSlide={true} >
                                             {images.length > 0 ?
                                                 [...images.map((img, index) => (
-                                                    <img key={index} src={img} alt={projectDetailData.title} className="w-full h-full object-cover" />
+                                                    <img key={index} src={img} alt={projectDetailData.title} className="w-full h-full object-flli" />
                                                 ))] :
                                                 []
                                             }
