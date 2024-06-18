@@ -11,8 +11,8 @@ RUN apt-get update \
     && apt-get -y install libpq-dev gcc \
     && apt-get install -y netcat-openbsd
 
-# Upgrade pip
-RUN pip install --upgrade pip
+# Install virtual environment
+RUN pip install virtualenv
 
 # Create new working directory
 RUN mkdir /portfolio-app
@@ -22,7 +22,11 @@ WORKDIR /portfolio-app
 
 # Install dependencies
 COPY ./requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+
+# Run virtual environment
+RUN python -m venv python-env
+RUN /bin/bash -c "source python-env/bin/activate"
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Create user
@@ -38,10 +42,6 @@ RUN chmod +x /entrypoint.sh
 USER adminuser
 
 ENTRYPOINT ["/entrypoint.sh"]
-
-
-# Run python app
-# CMD ["gunicorn", "--bind", "0.0.0.0:8000", "portfolioproject.wsgi:application"]
 
 # Expose port
 EXPOSE ${APP_PORT}
