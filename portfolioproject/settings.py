@@ -39,7 +39,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     'localhost.test',
-    'annaspratama.my.id',
+    'annaspratama.com', # Instance domain
+    '13.213.43.203' # Instance AWS Lightsail
 ]
 
 
