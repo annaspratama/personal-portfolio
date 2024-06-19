@@ -7,8 +7,8 @@ if (DEBUG) {
     host = "http://localhost.test/api"
     hostDefault = "http://localhost.test"
 } else {
-    host = "http://localhost.test/api"
-    hostDefault = "http://localhost.test"
+    host = "http://13.213.43.203/api"
+    hostDefault = "http://13.213.43.203"
 }
 
 const headers = {
