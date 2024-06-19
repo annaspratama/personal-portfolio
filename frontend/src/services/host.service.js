@@ -1,8 +1,18 @@
-// const port = "8000"
-const host = `http://localhost.test/api`
-const hostDefault = `http://localhost.test`
+import { DEBUG, APIToken } from "../../env"
+
+var host = null
+var hostDefault = null
+
+if (DEBUG) {
+    host = "http://localhost.test/api"
+    hostDefault = "http://localhost.test"
+} else {
+    host = "http://localhost.test/api"
+    hostDefault = "http://localhost.test"
+}
+
 const headers = {
-    Authorization: "Bearer 082e2233b0b8acf97ea2794b6234758a445ff256",
+    Authorization: APIToken,
 }
 const staticfiles = "assets"
 
