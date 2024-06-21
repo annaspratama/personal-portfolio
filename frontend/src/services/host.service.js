@@ -1,15 +1,7 @@
-import { DEBUG, APIToken } from "../../env"
+import { APIToken, APIURL, URLDEFAULT } from "../env"
 
-var host = null
-var hostDefault = null
-
-if (DEBUG) {
-    host = "http://localhost.test/api"
-    hostDefault = "http://localhost.test"
-} else {
-    host = "http://13.213.43.203/api"
-    hostDefault = "http://13.213.43.203"
-}
+const host = APIURL
+const hostDefault = URLDEFAULT
 
 const headers = {
     Authorization: APIToken,
