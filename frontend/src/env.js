@@ -1,13 +1,20 @@
-const DEBUG = Boolean(process.env.REACT_APP_DEBUG) || false
+/* eslint-disable eqeqeq */
+let DEBUG = process.env.REACT_APP_DEBUG || false
 const APIToken = process.env.REACT_APP_API_KEY || null
-const USEDOMAIN = process.env.REACT_APP_USE_DOMAIN || false
-var APIURL = null
-var URLDEFAULT = null
+const USEDOMAIN = process.env.REACT_APP_USE_DOMAIN || "Local"
+let APIURL = null
+let URLDEFAULT = null
 
-if (DEBUG === false && USEDOMAIN === "Live") {
+function toBoolean(value) {
+    return value.toLowerCase() === "true"
+}       
+
+DEBUG = toBoolean(DEBUG)
+
+if (!DEBUG && USEDOMAIN == "Live") {
     APIURL = process.env.REACT_APP_API_URL_DOMAIN
     URLDEFAULT = process.env.REACT_APP_URL_DOMAIN
-} else if (DEBUG === true && USEDOMAIN === "Dev") {
+} else if (DEBUG && USEDOMAIN == "Dev") {
     APIURL = process.env.REACT_APP_API_URL_IP
     URLDEFAULT = process.env.REACT_APP_URL_IP
 } else {
