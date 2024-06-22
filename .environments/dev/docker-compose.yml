@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   portfolio_django_app:
     container_name: portfolio_app
@@ -65,6 +63,7 @@ services:
       - portfolio_django_app
     networks:
       - network-portfolio
+    restart: always
 
 networks:
   network-portfolio:
