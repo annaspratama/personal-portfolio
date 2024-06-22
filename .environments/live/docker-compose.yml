@@ -1,0 +1,86 @@
+version: "3.8"
+
+services:
+  portfolio_django_app:
+    container_name: portfolio_app
+    command: gunicorn --bind 0.0.0.0:8000 portfolioproject.wsgi:application
+    build:
+      context: "./"
+      dockerfile: ./Dockerfile
+    image: "portfolio-app:1.0.0"
+    volumes:
+      - .:/portfolio-app
+    env_file:
+      - .env
+    environment:
+      - APP_PORT=$HOST_PORT
+      - MODE=local
+    ports:
+      - $HOST_PORT:$HOST_PORT
+    networks:
+      - network-portfolio
+    depends_on:
+      - portfolio_postgres_db
+      - portfolio_redis
+  portfolio_postgres_db:
+    image: postgres:alpine3.20
+    container_name: portfolio_db
+    environment: 
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_USER: $DB_USER
+      POSTGRES_DB: $DB_NAME
+    env_file:
+      - .env
+    volumes: 
+      - type: volume
+        source: postgres-portfolio-data
+        target: "/var/lib/postgresql/data"
+        read_only: false
+    ports: 
+      - $DB_PORT:$DB_PORT
+    networks:
+      - network-portfolio
+  portfolio_redis:
+    image: redis:7.2.5
+    container_name: redis_cache
+    env_file:
+      .env
+    ports:
+      - $REDIS_PORT:$REDIS_PORT
+    volumes:
+      - redis_data:/data
+    command: /bin/sh -c "redis-server --requirepass $$REDIS_PASSWORD"
+    networks:
+      - network-portfolio
+  portfolio_nginx:
+    container_name: portfolio_nginx
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    env_file:
+      - .env
+    ports:
+      - $NGINX_PORT:$NGINX_PORT
+    depends_on:
+      - portfolio_django_app
+    networks:
+      - network-portfolio
+  portfolio_certbot:
+    image: certbot/certbot,
+    container_name: portfolio_certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do sleep 6h & wait $${!}; certbot renew; done'"
+    networks:
+      - network-portfolio
+
+networks:
+  network-portfolio:
+    name: network-portfolio
+    driver: bridge
+
+volumes:
+  postgres-portfolio-data:
+    name: portfolio-postgresdb-data
+  redis_data:
