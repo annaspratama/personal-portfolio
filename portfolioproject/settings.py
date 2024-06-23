@@ -46,6 +46,12 @@ ALLOWED_HOSTS = [
 ]
 
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://annaspratama.com',
+    'https://www.annaspratama.com',
+]
+
+
 # Application definition
 
 INSTALLED_APPS = [
