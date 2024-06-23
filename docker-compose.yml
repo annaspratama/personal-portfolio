@@ -65,6 +65,8 @@ services:
     networks:
       - network-portfolio
     restart: always
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d/:ro
 
 networks:
   network-portfolio:
