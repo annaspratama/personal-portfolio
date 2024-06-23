@@ -1,5 +1,5 @@
 services:
-  portfolio_django_app:
+  portfolio-django-app:
     container_name: portfolio_app
     command: gunicorn --bind 0.0.0.0:8000 portfolioproject.wsgi:application
     build:
@@ -59,20 +59,28 @@ services:
       - .env
     ports:
       - $NGINX_PORT:$NGINX_PORT
+      - $NGINX_PORT_SSL:$NGINX_PORT_SSL
     depends_on:
-      - portfolio_django_app
+      - portfolio-django-app
     networks:
       - network-portfolio
     restart: always
     volumes:
-      - ./nginx/conf.d/:/etc/nginx/conf.d/:ro
-      - ./certbot/www:/var/www/certbot/:ro
-      - ./certbot/conf/:/etc/nginx/ssl/:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/nginx/ssl
+      - ./nginx/logs:/var/log/nginx
   certbot:
     image: certbot/certbot:latest
     volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+      - ./cerbot/log:/var/log/letsencrypt
+    # command: certonly --webroot -w /var/www/certbot --force-renewal --email annaspratama@icloud.com -d annaspratama.com -d www.annaspratama.com --agree-tos
+    depends_on:
+      - portfolio_nginx
+    networks:
+      - network-portfolio
 
 networks:
   network-portfolio:

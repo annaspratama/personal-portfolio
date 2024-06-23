@@ -41,6 +41,8 @@ ALLOWED_HOSTS = [
     'localhost.test',
     'annaspratama.com', # Instance domain
     'www.annaspratama.com', # Instance domain
+    'portfolio-django-app', # Container
+    '13.213.43.203', # Instance IP
 ]
 
 
