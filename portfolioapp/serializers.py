@@ -1,6 +1,5 @@
 from .models import About, Expertise, WorkExperience, Project, ProjectImage, Stack
 from rest_framework import serializers
-import logging
 
 
 class AboutSerializer(serializers.ModelSerializer):
