@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 from portfolioapp import views
 from django.conf.urls.static import static
-from django.views.generic import TemplateView
 from . import settings
 
 urlpatterns = [
@@ -27,7 +26,6 @@ urlpatterns = [
     # path(route='manifest.json', view=TemplateView.as_view(template_name='manifest.json', content_type='application/json'), name='manifest.json')
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # APIs URL
 urlpatterns += [
@@ -36,6 +34,8 @@ urlpatterns += [
 
 if settings.DEBUG:
     import debug_toolbar
+    
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     
     urlpatterns = [
         path('__debug__/', include(debug_toolbar.urls))
