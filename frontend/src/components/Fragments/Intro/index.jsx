@@ -19,7 +19,7 @@ const Intro = (props) => {
         <div className="">
             <div className={`rounded-2xl bg-white p-6 shadow dark:bg-black dark:shadow-dark ${addClassname}`}>
                 <div className="aspect-6/4 overflow-hidden rounded-lg bg-light pt-4 text-center dark:bg-dark-2">
-                    <img src={`${hostDefault}/${about.image}`} alt="Img Profile"
+                    <img src={`${hostDefault}${about.image}`} alt="Img Profile"
                         className="inline-block h-full w-full scale-110 object-contain object-bottom" />
                 </div>
 
