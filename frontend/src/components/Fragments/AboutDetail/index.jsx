@@ -19,7 +19,7 @@ const AboutDetail = () => {
                 <h2 className="text-4xl font-semibold text-dark dark:text-light">
                     Hi, I'm <span className="text-primary">Annas Pratama</span> 👋
                 </h2>
-                <p className="mt-4 text-lg text-muted dark:text-light/70 lg:mt-6 text-justify">
+                <p className="mt-4 mb-4 text-lg text-muted dark:text-light/70 lg:mt-6 text-justify">
                     {aboutData.description}
                 </p>
             </div>

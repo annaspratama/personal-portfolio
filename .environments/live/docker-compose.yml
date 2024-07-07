@@ -71,7 +71,7 @@ services:
       - ./certbot/conf:/etc/nginx/ssl
       - ./nginx/logs:/var/log/nginx
      # - ./static:/static:ro
-      - ./media:/media:ro
+      - ./media:/media:ro # sudo chmod 777 /media
   certbot:
     image: certbot/certbot:latest
     volumes:
